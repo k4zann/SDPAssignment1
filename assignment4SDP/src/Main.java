@@ -1,15 +1,18 @@
 public class Main {
     public static void main(String[] args) {
-        ConcreteWeatherStation weatherStation = new ConcreteWeatherStation();
+        StockMarket stockMarket = new StockMarketImpl();
 
-        Temperature display1 = new Temperature();
-        Temperature display2 = new Temperature();
+        StockObserver observer1 = new StockDisplay(stockMarket, "Apple");
+        StockObserver observer2 = new StockDisplay(stockMarket, "Google");
 
-        weatherStation.addObserver(display1);
-        weatherStation.addObserver(display2);
+        stockMarket.register(observer1);
+        stockMarket.register(observer2);
 
-        weatherStation.setTemperature(25.0f);
-        weatherStation.setTemperature(30.5f);
-        weatherStation.setTemperature(28.3f);
+        stockMarket.setStockPrice("Apple", 150.0);
+        stockMarket.setStockPrice("Google", 2800.0);
+
+        stockMarket.unregister(observer1);
+
+        stockMarket.setStockPrice("Apple", 155.0);
     }
 }
